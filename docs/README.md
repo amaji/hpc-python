@@ -4,7 +4,8 @@ This repository contains Sphinx configuration and documentation files for BSSwF-
 
 **Output:** Html docs can be found in `build/html/`. Load `build/html/index.html` in your browser.
 
-**Building:** We assume that you have installed anaconda and have the `sphinx-build` command in your `$PATH`. This can be easily done by loading the `anaconda` module and then running `make html` at the top-level directory. You need to install the following packages in Python to build this documentation:
+**Building:** We assume that you have installed anaconda and have the `sphinx-build` command in your `$PATH`. This can be easily done by loading the `anaconda` module and then running `make html` at the top-level directory. You need to install the following packages in Python to build this documentation:  
+
     - Sphinx  
     - sphinx-rtd-theme            
     - sphinxcontrib-applehelp     
