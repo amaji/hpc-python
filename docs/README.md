@@ -8,7 +8,6 @@ This repository contains Sphinx configuration and documentation files for BSSwF-
 
     - Sphinx  
     - sphinx-rtd-theme            
-    - sphinxcontrib-applehelp     
     - sphinxcontrib-bibtex   
  
 
