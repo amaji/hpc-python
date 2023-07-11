@@ -301,48 +301,51 @@ subcommand.
 .. container::
    :name: tab-hpc-py-reco
 
-   .. table:: Table 4: Summary of recommendations for managing Python packages at various HPC sites.
+   .. list-table:: Table 4: Summary of recommendations for managing Python packages at various HPC sites.
+      :width: 50%
       :align: center
+      :header-rows: 1
 
-      +--------------------+---------------------+-----------------+-------------------+
-      | HPC Site           | environment manager | package manager | Other suggestions |
-      +====================+=====================+=================+===================+
-      | OLCF               |                     |                 |                   | 
-      +--------------------+---------------------+-----------------+-------------------+
-      | NERSC              |                     |                 |                   | 
-      +--------------------+---------------------+-----------------+-------------------+
-      | Compute Canada     |                     |                 |                   |
-      +--------------------+---------------------+-----------------+-------------------+
-      | TACC               |                     |                 |                   |
-      +--------------------+---------------------+-----------------+-------------------+
-      | SDSC               |                     |                 |                   |
-      +--------------------+---------------------+-----------------+-------------------+
-      | CSCS               |                     |                 |                   |
-      +--------------------+---------------------+-----------------+-------------------+
-      | LLNL               |                     |                 |                   |
-      +--------------------+---------------------+-----------------+-------------------+
-      | Purdue             |                     |                 |                   |
-      +--------------------+---------------------+-----------------+-------------------+
-      |                    |                     |                 |                   |
-      +--------------------+---------------------+-----------------+-------------------+
+      * - HPC site
+        - Recommended environment manager
+        - Recommended package manager
+        - Other instructions
+      * - OLCF
+        - conda, venv 
+        - pip 
+        - * Parallel python
+          * Troubleshooting
 
 
 Running MPI codes with Python
 -----------------------------
 
-Several large HPC centers provide detailed directions for running MPI
-codes with Python
-:cite:`nersc-python,olcf-python,canada-python` In order to
-run parallel codes, users must load appropriate MPI libraries from the
+Several large HPC centers provide instructions for running MPI
+codes with Python :cite:`nersc-python,olcf-python,canada-python`. In order to
+run parallel codes, users must load appropriate compiler and MPI libraries from the
 system before installing the Python packages (mpi4py, h5py etc.). They
-must also load the MPI libraries while running their codes. Moreover,
-large scale parallel runs with Python can sometimes lead to IO
-bottlenecks. *We note that configuring parallel Python applications is
+must also load the MPI libraries while running their codes. Installing both mpi4py and 
+h5py with appropriate compiler and MPI combinations is fairly challenging considering the 
+dependency on vendor-provided MPI libraries. Both :cite:`nersc-python` and :cite:`olcf-python` 
+provide step-by-step commands for installing and testing mpi4py and h5py on their respective clusters. 
+In addition, :cite:`nersc-python` provides a pre-installed mpi4py environment and recommends users to 
+clone it---a much welcome simplification for the users. 
+
+
+Moreover, all the sites highlighted the negative impact of parallel Python codes on filesystems. 
+During startup, parallel Python codes can generate a lot of accesses to small files and can, therefore,
+lead to IO bottlenecks. Multiple solutions with varying degrees of sophistication are provided to 
+alleviate such contentions: i) to create the Python environment inside a container, ii) to create 
+the Python environment locally on each node, or iii) to use the fastest parallel filesystem and to avoid 
+the home directory. Another important consideration for running parallel Python codes is not to oversubscribe the 
+cores. For example, a mpi4py code that occupies all the cores on a system can also load multi-threaded 
+libraries such as numpy, thereby, accidentally oversubscribing the physical cores. This can be avoided
+by setting appropriate number of threads (``OMP_NUM_THREADS``) per MPI rank.
+
+*We note that configuring parallel Python applications is
 site-specific and users can benefit from simple scripts developed by HPC
 center staff to automate the installation and environment configuration
 process.*
-
-expand this section
 
 Troubleshooting guide
 ---------------------
