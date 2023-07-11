@@ -262,6 +262,14 @@ centers provide custom tools for creating Jupyter kernels
 important step for alleviating some of the user burdens while managing
 Python packages.
 
+In Table `3 <#tab-conda-command-summary>`__, we provide specific
+``conda`` commands for different steps highlighted in Figure
+`1 <#fig-hpc-python-tasks>`__. Similar analogies can be made for other
+virtual environments such as pipenv or venv. Users are recommended to
+consult the official ``conda`` documentations
+:cite:`conda-guide` for detailed description of each
+subcommand.
+
 .. container::
    :name: tab-conda-command-summary
 
@@ -290,13 +298,7 @@ Python packages.
       \                         ``conda remove -p env_prefix``
       ========================= =========================================
 
-In Table `3 <#tab-conda-command-summary>`__, we provide specific
-``conda`` commands for different steps highlighted in Figure
-`1 <#fig-hpc-python-tasks>`__. Similar analogies can be made for other
-virtual environments such as pipenv or venv. Users are recommended to
-consult the official ``conda`` documentations
-:cite:`conda-guide` for detailed description of each
-subcommand.
+Below we present a summary of the recommended environment managers and package managers across different HPC centers. Majority of the sites preferred ``conda`` and ``venv`` as environment managers. Although there are some common themes (e.g. how to run mpi4py, how to use Jupyter, etc.), the documentations have varying level of details. Due to the widely varying Python environments and their system dependencies, users can easily make mistakes as they move from one cluster to another.
 
 .. container::
    :name: tab-hpc-py-reco
@@ -310,11 +312,48 @@ subcommand.
         - Recommended environment manager
         - Recommended package manager
         - Other instructions
-      * - OLCF
+      * - OLCF :cite:`olcf-python`
         - conda, venv 
-        - pip 
-        - * Parallel python
+        - pip, conda 
+        - * Parallel Python
+          * Best practices
+      * - NERSC :cite:`nersc-python`
+        - conda
+        - pip, conda
+        - * Parallel Python
+          * Profiling Python
           * Troubleshooting
+      * - LLNL :cite:`llnl-python`
+        - virtualenv, conda
+        - pip
+        - * Parallel Python
+          * Troubleshooting 
+      * - Compute Canada :cite:`canada-python`
+        - virtualenv
+        - pip
+        - * Parallel Python
+          * Troubleshooting
+      * - CSCS :cite:`cscs-python`
+        - venv
+        - pip
+        - 
+      * - TACC :cite:`pytacc2015`
+        - venv
+        - pip
+        -
+      * - NCAR :cite:`ncar-python`
+        - conda, mamba
+        - conda, mamba
+        - 
+      * - Purdue RCAC :cite:`rcac-python`
+        - conda
+        - conda, pip
+        - * Troubleshooting
+      * - Yale CRC :cite:`conda-yale`
+        - conda, mamba
+        - conda, pip
+        - * Parallel Python
+
 
 
 Running MPI codes with Python
@@ -607,7 +646,7 @@ We anticipate the following timeline for implementing the features.
 .. container::
    :name: tab-timeline
 
-   .. table:: Table 4: Implementation timeline for ``conda-env-mod``.
+   .. table:: Table 5: Implementation timeline for ``conda-env-mod``.
       :align: center
 
       ========= ================
