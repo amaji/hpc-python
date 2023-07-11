@@ -10,7 +10,7 @@ Fortran, ii) it gives scientists the power of object-oriented
 programming, iii) application performance can be improved by using
 lower-level C/Fortran libraries, and iv) scientists can use an abundance
 of Python libraries to boost their productivity. In recent years, rapid
-advances in AI/ML and data analytics and the growth of interactive
+advances in AI/ML and data analytics, and the growth of interactive
 computing platforms (Jupyter notebooks) have further highlighted the
 need for Python in HPC. However, despite all its benefits, scientists
 often find it difficult to manage their Python packages in HPC
@@ -209,15 +209,6 @@ frequently asked questions for HPC Python.
       +----------------------------------------------------------------+
 
 
-.. _fig-hpc-python-tasks:
-
-.. figure:: images/conda-tasks.jpg
-   :alt:
-   :align: center 
-   :width: 100.0%
-
-   Figure 1: Tasks related to managing Python packages in HPC environments. Each use-case in Table `2 <#tab-hpc-python-faq>`__ is displayed with a dierent color in this diagram. Arrows with the same color show the steps that users need to execute for each task. Circles represent steps of each task and various conda subcommands are shown with a green circle. For example, to list all the packages in an environment (shown here with the yellow arrow), users must first activate the environment and then run the ``conda list`` command.
-
 We answer each of these questions by highlighting the steps that users
 need to perform in Figure `1 <#fig-hpc-python-tasks>`__. At a
 high-level, all Python package installations on HPC clusters must be
@@ -250,6 +241,15 @@ specification file (follow the orange arrow in Figure
 formatted as a YAML file and it can contain detailed names and versions
 for all packages. Users can share the specification file with colleagues
 or use it to recreate the environment at a later time.
+
+.. _fig-hpc-python-tasks:
+
+.. figure:: images/conda-tasks.jpg
+   :alt:
+   :align: center 
+   :width: 100.0%
+
+   Figure 1: Tasks related to managing Python packages in HPC environments. Each use-case in Table `2 <#tab-hpc-python-faq>`__ is displayed with a different color in this diagram. Arrows with the same color show the steps that users need to execute for each task. Circles represent steps of each task and various conda subcommands are shown with a green circle. For example, to list all the packages in an environment (shown here with the yellow arrow), users must first activate the environment and then run the ``conda list`` command.
 
 Most HPC centers also provide steps for using an environment in
 Jupyterhub. To install and use a custom package in Jupyterhub, users
@@ -298,6 +298,35 @@ consult the official ``conda`` documentations
 :cite:`conda-guide` for detailed description of each
 subcommand.
 
+.. container::
+   :name: tab-hpc-py-reco
+
+   .. table:: Table 4: Summary of recommendations for managing Python packages at various HPC sites.
+      :align: center
+
+      +--------------------+---------------------+-----------------+-------------------+
+      | HPC Site           | environment manager | package manager | Other suggestions |
+      +====================+=====================+=================+===================+
+      | OLCF               |                     |                 |                   | 
+      +--------------------+---------------------+-----------------+-------------------+
+      | NERSC              |                     |                 |                   | 
+      +--------------------+---------------------+-----------------+-------------------+
+      | Compute Canada     |                     |                 |                   |
+      +--------------------+---------------------+-----------------+-------------------+
+      | TACC               |                     |                 |                   |
+      +--------------------+---------------------+-----------------+-------------------+
+      | SDSC               |                     |                 |                   |
+      +--------------------+---------------------+-----------------+-------------------+
+      | CSCS               |                     |                 |                   |
+      +--------------------+---------------------+-----------------+-------------------+
+      | LLNL               |                     |                 |                   |
+      +--------------------+---------------------+-----------------+-------------------+
+      | Purdue             |                     |                 |                   |
+      +--------------------+---------------------+-----------------+-------------------+
+      |                    |                     |                 |                   |
+      +--------------------+---------------------+-----------------+-------------------+
+
+
 Running MPI codes with Python
 -----------------------------
 
@@ -308,10 +337,12 @@ run parallel codes, users must load appropriate MPI libraries from the
 system before installing the Python packages (mpi4py, h5py etc.). They
 must also load the MPI libraries while running their codes. Moreover,
 large scale parallel runs with Python can sometimes lead to IO
-bottlenecks. We note that configuring parallel Python applications is
+bottlenecks. *We note that configuring parallel Python applications is
 site-specific and users can benefit from simple scripts developed by HPC
 center staff to automate the installation and environment configuration
-process.
+process.*
+
+expand this section
 
 Troubleshooting guide
 ---------------------
@@ -321,9 +352,9 @@ Python package installation issues. For example, at our center, users
 commonly run out of storage space by allowing ``pip`` or ``conda`` to
 cache packages over a long period. Similarly, installations in the
 user’s site-packages directory (``$HOME/.local``) can interfere with
-packages in the environments. It is beneficial to provide a step-by-step
+packages in the environments. *It is beneficial to provide a step-by-step
 troubleshooting guide for users or automate parts of the troubleshooting
-process using a tool. We refer users to :cite:`rcac-python`
+process using a tool.* We refer users to :cite:`rcac-python`
 for some of the troubleshooting steps that they can follow.
 
 .. _`sec-py-configs`:
@@ -337,7 +368,7 @@ location. These configurations can be used to control the behaviors of
 package managers such as ``pip`` and ``conda`` and can significantly
 reduce the number of arguments that users need to provide via command
 line. Site-wide configurations can also help ensure that users are
-following the best practices deemed necessary by the center staff.
+following the best practices deemed necessary by the center staff. 
 Advanced users can, of course, override these configurations with their
 personal configurations or by specifying preferences in the command
 line. We present some example configurations for ``pip`` and ``conda``
@@ -446,11 +477,11 @@ can define the ``PYTHONPATH`` variable pointing to the environment and
 can also point to binary locations in the environment. Apart from these,
 module files have the capability to capture additional dependency on
 system compilers and libraries (e.g. MPI libraries) that were loaded
-during the package installation can be loaded automatically. The
+during the package installation and they can later be loaded automatically. The
 ``conda-env-mod`` tool generates module files from Python environments
 and provides users with instructions for loading the modules. We have
 observed that it also makes it much easier to share Python environments
-among members of a group. One person in the group can assume the role of
+among members of a research group. One person in the group can assume the role of
 the maintainer and other users only need to generate the module file
 from the shared environment directory. More details about the motivation
 for using module files and how ``conda-env-mod`` simplifies environment
@@ -476,7 +507,7 @@ environment to be used in Jupyter. Moreover, ``conda-env-mod`` can be
 used as a standalone tool for creating a module file from a Python
 environment or for creating a jupyter kernel. The current implementation
 of ``conda-env-mod`` can support the use-cases 1-3,5,7-8 in Table
-`1 <#tab-hpc-python-challenges>`__. It is publicly available for
+`2 <#tab-hpc-python-faq>`__. It is publicly available for
 download on Github :cite:`conda-env-mod-github`.
 
 .. _`fig-conda-env-mod-overview`:
@@ -562,7 +593,7 @@ use-cases identified in Table `2 <#tab-hpc-python-faq>`__.
    use Python from the environment as opposed to using the Python from
    the base Anaconda. This change has already been implemented.
 
-#. **Create sample ``.condarc`` and ``pip.conf`` files.** As described
+#. **Create sample** ``.condarc`` **and** ``pip.conf`` **files.** As described
    in Section `3 <#sec-py-configs>`__, default behaviors of package
    managers can be updated by site-wide configuration files. We will
    share sample configuration files that centers can easily adopt and
@@ -578,7 +609,6 @@ We anticipate the following timeline for implementing the features.
 
       ========= ================
       Weeks 1-2 Tasks 1-2
-      ========= ================
       Weeks 3-4 Tasks 3-4
       Weeks 5-6 Tasks 5-6 and 11
       Weeks 7-8 Tasks 7-9
