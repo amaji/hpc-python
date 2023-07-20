@@ -27,5 +27,8 @@ Simplifying scientific Python package installation and environment management --
 Acknowledgements
 ================
 
-This work was funded by the `Better Scientific Software (BSSw) Fellowship <https://bssw.io/pages/bssw-fellowship-program>`_ sponsored by the US National Science Foundation (NSF) and the US Department of Energy (DOE).
+This work was funded by the |bssw_fellowship| sponsored by the US National Science Foundation (NSF) and the US Department of Energy (DOE).
 
+.. |bssw_fellowship| raw:: html
+
+   <a href="https://bssw.io/pages/bssw-fellowship-program" target="_blank">Better Scientific Software (BSSw) Fellowship</a>
