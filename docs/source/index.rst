@@ -3,8 +3,8 @@
 
 .. .. |project_caps| replace:: '%s' % project
 
-[BSSwF] Simplifying scientic Python package installation and environment management
-===================================================================================
+Simplifying scientific Python package installation and environment management -- challenges and solutions
+=========================================================================================================
 
 
 .. toctree::
@@ -16,9 +16,16 @@
    motivation/*
 
 
-Indices and tables
-==================
+.. Indices and tables
+.. ==================
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. * :ref:`genindex`
+.. * :ref:`modindex`
+.. * :ref:`search`
+
+
+Acknowledgements
+================
+
+This work was funded by the `Better Scientific Software (BSSw) Fellowship <https://bssw.io/pages/bssw-fellowship-program>`_ sponsored by the US National Science Foundation (NSF) and the US Department of Energy (DOE).
+

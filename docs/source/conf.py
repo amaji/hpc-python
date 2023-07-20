@@ -17,7 +17,7 @@ import sys
 
 # -- Project information -----------------------------------------------------
 
-project = 'BSSwF-Python'
+project = 'HPC-Python-Best-Practices'
 project_lower = project.lower()
 copyright = '2023, Amiya K Maji'
 author = 'Amiya K Maji'
